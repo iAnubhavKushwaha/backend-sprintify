@@ -9,7 +9,21 @@ import invitationRoutes from './routes/invitations.js';
 
 dotenv.config();
 const app = express();
-app.use(cors());
+
+// CORS to allow requests from your frontend URL
+const allowedOrigins = [
+    'https://frontend-sprintify-zquy.vercel.app',
+    'http://localhost:3000', 
+];
+
+// CORS middleware
+app.use(cors({
+    origin: allowedOrigins,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true, 
+}));
+
+
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
